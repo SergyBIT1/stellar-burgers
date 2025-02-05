@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
+  TRegisterData,
   loginUserApi,
   getUserApi,
   registerUserApi,
@@ -14,7 +15,7 @@ import { deleteCookie, setCookie } from '../../../utils/cookie';
 type TUserState = {
   loading: boolean;
   error: string | null;
-  // registerData: TRegisterData | null;
+  registerData: TRegisterData | null;
   userData: TUser | null;
   isAuthenticated: boolean;
   userOrders: TOrder[];
@@ -23,7 +24,7 @@ type TUserState = {
 export const initialState: TUserState = {
   loading: false,
   error: null,
-  // registerData: null,
+  registerData: null,
   userData: null,
   isAuthenticated: false,
   userOrders: []
@@ -163,4 +164,6 @@ export const userSlice = createSlice({
   }
 });
 
+export const { userLogout, resetError } = userSlice.actions;
+export const { getUserState, getError } = userSlice.selectors;
 export default userSlice.reducer;

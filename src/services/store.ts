@@ -4,7 +4,7 @@ import orderSlice from './slices/orderSlice/orderSlice';
 import feedSlice from './slices/feedSlice/feedSlice';
 import userSlice from './slices/userSlice/userSlice';
 import ingredientSlice from './slices/ingredientSlice/ingredientSlice';
-import profileOrderSlice from './slices/profileOrderSlice/profileOrderSlice'
+import profileOrderSlice from './slices/profileOrderSlice/profileOrderSlice';
 
 import {
   TypedUseSelectorHook,
