@@ -30,6 +30,8 @@ export const initialState: TUserState = {
   userOrders: []
 };
 
+export const registerUser = createAsyncThunk('user/regUser', registerUserApi);
+
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async ({ email, password }: TLoginData) => {
@@ -43,7 +45,6 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const registerUser = createAsyncThunk('user/regUser', registerUserApi);
 export const getUser = createAsyncThunk('user/getUser', getUserApi);
 export const updateUser = createAsyncThunk('user/updateUser', updateUserApi);
 export const getOrdersAll = createAsyncThunk('user/ordersUser', getOrdersApi);
