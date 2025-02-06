@@ -13,8 +13,8 @@ export const Login: FC = () => {
   const [password, setPassword] = useState('');
   const error = useSelector(getError);
 
-  const { isAuthenticated } = useSelector(getUserState);
-  console.log(isAuthenticated);
+  const { isAuthChecked } = useSelector(getUserState);
+  console.log(isAuthChecked);
 
   const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ export const Login: FC = () => {
     dispatch(loginUser({ email, password }));
   };
 
-  if (isAuthenticated) {
+  if (isAuthChecked) {
     return <Navigate to={'/'} />;
   }
 

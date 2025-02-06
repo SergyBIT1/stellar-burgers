@@ -17,7 +17,7 @@ type TUserState = {
   error: string | null;
   registerData: TRegisterData | null;
   userData: TUser | null;
-  isAuthenticated: boolean;
+  isAuthChecked: boolean;
   userOrders: TOrder[];
 };
 
@@ -26,7 +26,7 @@ export const initialState: TUserState = {
   error: null,
   registerData: null,
   userData: null,
-  isAuthenticated: false,
+  isAuthChecked: false,
   userOrders: []
 };
 
@@ -73,38 +73,35 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
-        //ожидание
         state.loading = true;
         state.error = null;
-        state.isAuthenticated = false;
+        state.isAuthChecked = false;
       })
       .addCase(registerUser.rejected, (state, action) => {
-        //неудачная регистрация
         state.loading = false;
         state.error = action.error.message as string;
-        state.isAuthenticated = false;
+        state.isAuthChecked = false;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
-        //успешная регистрация
         state.loading = false;
         state.error = null;
         state.userData = action.payload.user;
-        state.isAuthenticated = true;
+        state.isAuthChecked = true;
       })
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
-        state.isAuthenticated = false;
+        state.isAuthChecked = false;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message as string;
-        state.isAuthenticated = false;
+        state.isAuthChecked = false;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.error = null;
         state.loading = false;
-        state.isAuthenticated = true;
+        state.isAuthChecked = true;
         state.userData = action.payload.user;
       })
       .addCase(getUser.pending, (state) => {
@@ -116,7 +113,7 @@ export const userSlice = createSlice({
         state.error = action.error.message as string;
       })
       .addCase(getUser.fulfilled, (state, action) => {
-        state.isAuthenticated = true;
+        state.isAuthChecked = true;
         state.loading = false;
         state.userData = action.payload.user;
         state.error = null;
@@ -139,12 +136,12 @@ export const userSlice = createSlice({
         state.error = null;
       })
       .addCase(logoutUser.rejected, (state, action) => {
-        state.isAuthenticated = true;
+        state.isAuthChecked = true;
         state.error = action.error.message as string;
         state.loading = false;
       })
       .addCase(logoutUser.fulfilled, (state) => {
-        state.isAuthenticated = false;
+        state.isAuthChecked = false;
         state.error = null;
         state.loading = false;
         state.userData = null;
