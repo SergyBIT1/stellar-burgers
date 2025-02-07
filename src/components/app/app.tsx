@@ -38,62 +38,20 @@ const App = () => {
         <Route path='/ingredients/:id' element={<IngredientDetails />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='/feed/:number' element={<OrderInfo />} />
-        <Route
-          path='/login'
-          element={
-            <ProtectedRoute isAuthOnly>
-              <Login />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/register'
-          element={
-            <ProtectedRoute isAuthOnly>
-              <Register />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/forgot-password'
-          element={
-            <ProtectedRoute isAuthOnly>
-              <ForgotPassword />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/reset-password'
-          element={
-            <ProtectedRoute isAuthOnly>
-              <ResetPassword />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/profile'
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/profile/orders'
-          element={
-            <ProtectedRoute>
-              <ProfileOrders />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/profile/orders/:number'
-          element={
-            <ProtectedRoute>
-              <OrderInfo />
-            </ProtectedRoute>
-          }
-        />
+
+        <Route element={<ProtectedRoute isAuthOnly />}>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/reset-password' element={<ResetPassword />} />
+        </Route>
+
+        <Route element={<ProtectedRoute isAuthOnly={false} />}>
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile/orders' element={<ProfileOrders />} />
+          <Route path='/profile/orders/:number' element={<OrderInfo />} />
+        </Route>
+
         <Route path='*' element={<NotFound404 />} />
       </Routes>
       {background && (
@@ -111,6 +69,7 @@ const App = () => {
               </Modal>
             }
           />
+
           <Route
             path='/feed/:number'
             element={
@@ -124,21 +83,6 @@ const App = () => {
               </Modal>
             }
           />
-          <Route element={<ProtectedRoute isAuthOnly={false} />}>
-            <Route
-              path='/profile/orders/:number'
-              element={
-                <Modal
-                  title={`#${location.pathname.match(/\d+/)}`}
-                  onClose={() => {
-                    history.back();
-                  }}
-                >
-                  <OrderInfo />
-                </Modal>
-              }
-            />
-          </Route>
         </Routes>
       )}
     </div>

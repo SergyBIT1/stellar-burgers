@@ -14,7 +14,6 @@ export const Login: FC = () => {
   const error = useSelector(getError);
 
   const { isAuthenticated } = useSelector(getUserState);
-  console.log(isAuthenticated);
 
   const dispatch = useDispatch();
 

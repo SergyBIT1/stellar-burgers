@@ -9,7 +9,6 @@ import {
 } from '../../services/slices/feedSlice/feedSlice';
 
 export const Feed: FC = () => {
-  /** TODO: взял переменную из стора */
   const { orders, loading } = useSelector(getFeedState);
   const dispatch = useDispatch();
   useEffect(() => {

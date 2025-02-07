@@ -18,7 +18,6 @@ type TUserState = {
   registerData: TRegisterData | null;
   user: TUser | null;
   isAuthenticated: boolean;
-  // isAuthOnly: boolean;
   userOrders: TOrder[];
 };
 
@@ -28,7 +27,6 @@ export const initialState: TUserState = {
   registerData: null,
   user: null,
   isAuthenticated: false,
-  // isAuthOnly: false,
   userOrders: []
 };
 
