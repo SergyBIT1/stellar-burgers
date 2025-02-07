@@ -4,6 +4,6 @@ import { useSelector } from 'react-redux';
 import { getUserState } from '../../services/slices/userSlice/userSlice';
 
 export const AppHeader: FC = () => {
-  const data = useSelector(getUserState).userData;
+  const data = useSelector(getUserState).user;
   return <AppHeaderUI userName={data?.name} />;
 };

@@ -9,7 +9,7 @@ import {
   Register,
   ResetPassword
 } from '@pages';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import '../../index.css';
 import styles from './app.module.css';
 

@@ -15,7 +15,7 @@ export const BurgerConstructor: FC = () => {
   const navigate = useNavigate();
   const { constructorItems, orderModalData, orderRequest } =
     useSelector(getConstructorState);
-  const isAuth = useSelector(getUserState).isAuthChecked;
+  const isAuth = useSelector(getUserState).isAuthenticated;
 
   const dispatch = useDispatch();
 
