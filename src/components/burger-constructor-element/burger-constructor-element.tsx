@@ -6,7 +6,7 @@ import {
   moveIngredientUp,
   moveIngredientDown
 } from '../../services/slices/constructorSlice/constructorSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '@store';
 
 export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
   ({ ingredient, index, totalItems }) => {

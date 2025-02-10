@@ -1,7 +1,7 @@
 import { Preloader } from '@ui';
 import { FC } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useSelector } from '../../services/store';
+import { useSelector } from '@store';
 
 import React from 'react';
 import {

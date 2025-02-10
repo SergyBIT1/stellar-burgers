@@ -90,14 +90,6 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route
-          path='/profile/orders/:number'
-          element={
-            <ProtectedRoute>
-              <OrderInfo />
-            </ProtectedRoute>
-          }
-        />
 
         <Route path='*' element={<NotFound404 />} />
       </Routes>
@@ -128,6 +120,20 @@ const App = () => {
               >
                 <OrderInfo />
               </Modal>
+            }
+          />
+
+          <Route
+            path='/profile/orders/:number'
+            element={
+              <ProtectedRoute>
+                <Modal
+                  title={`#${location.pathname.match(/\d+/)}`}
+                  onClose={() => history.back()}
+                >
+                  <OrderInfo />
+                </Modal>
+              </ProtectedRoute>
             }
           />
         </Routes>
