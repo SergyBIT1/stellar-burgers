@@ -9,13 +9,13 @@ import {
   setRequest,
   resetModal
 } from '../../services/slices/constructorSlice/constructorSlice';
-import { getUserState } from '../../services/slices/userSlice/userSlice';
+import { getUserSelector } from '../../services/slices/userSlice/userSlice';
 
 export const BurgerConstructor: FC = () => {
   const navigate = useNavigate();
   const { constructorItems, orderModalData, orderRequest } =
     useSelector(getConstructorState);
-  const isAuth = useSelector(getUserState).isAuthenticated;
+  const user = useSelector(getUserSelector);
 
   const dispatch = useDispatch();
 
@@ -29,12 +29,12 @@ export const BurgerConstructor: FC = () => {
   }
 
   const onOrderClick = () => {
-    if (isAuth && constructorItems.bun) {
+    if (user && constructorItems.bun) {
       dispatch(setRequest(true));
       dispatch(orderBurger(arr));
-    } else if (isAuth && !constructorItems.bun) {
+    } else if (user && !constructorItems.bun) {
       return;
-    } else if (!isAuth) {
+    } else if (!user) {
       navigate('/login');
     }
   };

@@ -17,6 +17,7 @@ type TUserState = {
   error: string | null;
   registerData: TRegisterData | null;
   user: TUser | null;
+  userCheck: boolean;
   isAuthenticated: boolean;
   userOrders: TOrder[];
 };
@@ -26,6 +27,7 @@ export const initialState: TUserState = {
   error: null,
   registerData: null,
   user: null,
+  userCheck: false,
   isAuthenticated: false,
   userOrders: []
 };
@@ -62,13 +64,18 @@ export const userSlice = createSlice({
     userLogout: (state) => {
       state.user = null;
     },
+    checkUser: (state) => {
+      state.userCheck = true;
+    },
     resetError: (state) => {
       state.error = null;
     }
   },
   selectors: {
-    getUserState: (state) => state,
-    getError: (state) => state.error
+    getUserSelector: (state) => state.user,
+    getUserCheckSelector: (state) => state.userCheck,
+    getError: (state) => state.error,
+    getUserLoading: (state) => state.loading
   },
   extraReducers: (builder) => {
     builder
@@ -162,6 +169,11 @@ export const userSlice = createSlice({
   }
 });
 
-export const { userLogout, resetError } = userSlice.actions;
-export const { getUserState, getError } = userSlice.selectors;
+export const { userLogout, resetError, checkUser } = userSlice.actions;
+export const {
+  getUserSelector,
+  getUserCheckSelector,
+  getUserLoading,
+  getError
+} = userSlice.selectors;
 export default userSlice.reducer;

@@ -17,7 +17,7 @@ import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { useEffect } from 'react';
 import { useDispatch } from '../../services/store';
-import { getUser } from '../../services/slices/userSlice/userSlice';
+import { getUser, checkUser } from '../../services/slices/userSlice/userSlice';
 import { getIngredients } from '../../services/slices/ingredientSlice/ingredientSlice';
 
 const App = () => {
@@ -26,7 +26,10 @@ const App = () => {
   const background = location.state?.background;
 
   useEffect(() => {
-    dispatch(getUser());
+    dispatch(getUser())
+      .unwrap()
+      .catch(() => {})
+      .finally(() => dispatch(checkUser()));
     dispatch(getIngredients());
   }, [dispatch]);
 
@@ -39,18 +42,62 @@ const App = () => {
         <Route path='/feed' element={<Feed />} />
         <Route path='/feed/:number' element={<OrderInfo />} />
 
-        <Route element={<ProtectedRoute isAuthOnly />}>
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/forgot-password' element={<ForgotPassword />} />
-          <Route path='/reset-password' element={<ResetPassword />} />
-        </Route>
-
-        <Route element={<ProtectedRoute isAuthOnly={false} />}>
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/profile/orders' element={<ProfileOrders />} />
-          <Route path='/profile/orders/:number' element={<OrderInfo />} />
-        </Route>
+        <Route
+          path='/login'
+          element={
+            <ProtectedRoute isAuthOnly>
+              <Login />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/register'
+          element={
+            <ProtectedRoute isAuthOnly>
+              <Register />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/forgot-password'
+          element={
+            <ProtectedRoute isAuthOnly>
+              <ForgotPassword />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/reset-password'
+          element={
+            <ProtectedRoute isAuthOnly>
+              <ResetPassword />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/profile'
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/profile/orders'
+          element={
+            <ProtectedRoute>
+              <ProfileOrders />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/profile/orders/:number'
+          element={
+            <ProtectedRoute>
+              <OrderInfo />
+            </ProtectedRoute>
+          }
+        />
 
         <Route path='*' element={<NotFound404 />} />
       </Routes>

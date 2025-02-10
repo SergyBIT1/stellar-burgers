@@ -3,14 +3,15 @@ import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from '../../services/store';
 import {
   getUser,
-  getUserState,
+  getUserLoading,
+  getUserSelector,
   updateUser
 } from '../../services/slices/userSlice/userSlice';
 import { Preloader } from '@ui';
 
 export const Profile: FC = () => {
-  const data = useSelector(getUserState).user;
-  const loading = useSelector(getUserState).loading;
+  const data = useSelector(getUserSelector);
+  const loading = useSelector(getUserLoading);
   const dispatch = useDispatch();
 
   const user = {
