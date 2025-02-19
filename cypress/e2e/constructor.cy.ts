@@ -85,7 +85,7 @@ describe('Создание заказа', () => {
       // закрытие модального окна
       cy.get('[data-cy=modal-content] button[type=button]').click();
 
-      // проврка что закрыто
+      // проверка что закрыто
       cy.get('[data-cy=modal-content]').should('not.exist');
     });
 
@@ -105,39 +105,39 @@ describe('Создание заказа', () => {
 
   describe('Создание заказа', () => {
     it('создание заказа и проверка номера заказа', () => {
-    cy.wait('@getIngredients');
+      cy.wait('@getIngredients');
 
-    cy.get(addButtonBun).click();
+      cy.get(addButtonBun).click();
 
-    cy.get(addButtonIngredient).click();
+      cy.get(addButtonIngredient).click();
 
-    cy.get('[data-cy=making-an-order-button]').click();
-    cy.wait('@postOrder');
+      cy.get('[data-cy=making-an-order-button]').click();
+      cy.wait('@postOrder');
 
-    cy.get('[data-cy=modal-content]').contains('10701').should('exist');
-  });
+      cy.get('[data-cy=modal-content]').contains('10701').should('exist');
+    });
 
-  it('закрытие модального окна заказа и проверка того, что конструктор пуст', () => {
-    cy.wait('@getIngredients');
+    it('закрытие модального окна заказа и проверка того, что конструктор пуст', () => {
+      cy.wait('@getIngredients');
 
-    cy.get(addButtonBun).click();
+      cy.get(addButtonBun).click();
 
-    cy.get(addButtonIngredient).click();
+      cy.get(addButtonIngredient).click();
 
-    cy.get('[data-cy=making-an-order-button]').click();
-    cy.wait('@postOrder');
+      cy.get('[data-cy=making-an-order-button]').click();
+      cy.wait('@postOrder');
 
-    cy.get('[data-cy=modal-content]').contains('10701').should('exist');
+      cy.get('[data-cy=modal-content]').contains('10701').should('exist');
 
-    cy.get('[data-cy=modal-content] button[type=button]').click();
+      cy.get('[data-cy=modal-content] button[type=button]').click();
 
-    cy.get('[data-cy=modal-content]').should('not.exist');
+      cy.get('[data-cy=modal-content]').should('not.exist');
 
-    cy.get('[data-cy=bun-top]').should('not.exist');
+      cy.get('[data-cy=bun-top]').should('not.exist');
 
-    cy.get('[data-cy=bun-bottom]').should('not.exist');
+      cy.get('[data-cy=bun-bottom]').should('not.exist');
 
-    cy.get('[data-cy=between-buns]').should('not.exist');
+      cy.get('[data-cy=between-buns]').should('not.exist');
+    });
   });
 });
-})
